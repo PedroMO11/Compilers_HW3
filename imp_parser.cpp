@@ -3,10 +3,10 @@
 #include "imp_parser.hh"
 
 
-const char* Token::token_names[27] = {
+const char* Token::token_names[29] = {
   "LPAREN" , "RPAREN", "PLUS", "MINUS", "MULT","DIV","EXP","LT","LTEQ","EQ",
   "NUM", "ID", "PRINT", "SEMICOLON", "COMMA", "ASSIGN", "CONDEXP", "IF", "THEN", "ELSE", "ENDIF", "WHILE", "DO",
-  "ENDWHILE", "ERR", "END", "VAR" };
+  "ENDWHILE", "ERR", "END", "VAR", "TRUE", "FALSE" };
 
 Token::Token(Type type):type(type) { lexema = ""; }
 
@@ -38,6 +38,9 @@ Scanner::Scanner(string s):input(s),first(0),current(0) {
   reserved["do"] = Token::DO;
   reserved["endwhile"] = Token::ENDWHILE;
   reserved["var"] = Token::VAR;
+  reserved["true"] = Token::TRUE;
+  reserved["false"] = Token::FALSE;
+
 }
 
 Token* Scanner::nextToken() {
@@ -349,6 +352,8 @@ Exp* Parser::parseFExp() {
 }
 
 Exp* Parser::parseFactor() {
+  if (match(Token::TRUE) || match(Token::FALSE))
+    return new BoolExp(previous->lexema);
   if (match(Token::NUM)) {
     return new NumberExp(stoi(previous->lexema));
   }

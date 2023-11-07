@@ -37,6 +37,15 @@ public:
   ~BinaryExp();
 };
 
+class BoolExp : public Exp {
+public:
+  bool value;
+  BoolExp(string v);
+  int accept(ImpVisitor* v);
+  ImpType accept(TypeVisitor* v);
+  ~BoolExp();
+};
+
 class NumberExp : public Exp {
 public:
   int value;
