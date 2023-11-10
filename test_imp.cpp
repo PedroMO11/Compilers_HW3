@@ -29,7 +29,7 @@ int main(int argc, const char* argv[]) {
   ImpInterpreter interpreter;
   ImpTypeChecker checker;
 
-  
+  cout << endl << "Printing program:" << endl;
   printer.print(program);
   
   cout << endl << "Type checking:" << endl;

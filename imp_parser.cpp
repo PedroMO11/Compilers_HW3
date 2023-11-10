@@ -302,7 +302,7 @@ Stm* Parser::parseStatement() {
 }
 
 Exp* Parser::parseExp() {
-  return parseCExp();
+  return parseBExp();
 }
 
 Exp* Parser::parseBExp() {
@@ -310,8 +310,8 @@ Exp* Parser::parseBExp() {
   e = parseCExp();
   if(match(Token::AND) || match(Token::OR)) {
     Token::Type op = previous->type;
-    BinaryOp binop = (op==Token::AND)?Token::AND:Token::OR;
-    rhs = parseCExp();
+    BinaryOp binop = (op==Token::AND)?BinaryOp::AND:BinaryOp::OR;
+    rhs = parseBExp();
     e = new BinaryExp(e, rhs, binop);
   }
   return e;

@@ -95,11 +95,17 @@ int ImpInterpreter::visit(BinaryExp* e) {
   case LT: result = (v1 < v2) ? 1 : 0; break;
   case LTEQ: result = (v1 <= v2) ? 1: 0; break;
   case EQ: result = (v1 == v2) ? 1 : 0; break;
+  case AND: result = (v1 && v2) ? 1 : 0; break;
+  case OR: result = (v1 || v2) ? 1 : 0; break;
   }
   return result;
 }
 
 int ImpInterpreter::visit(NumberExp* e) {
+  return e->value;
+}
+
+int ImpInterpreter::visit(BoolExp* e) {
   return e->value;
 }
 

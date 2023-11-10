@@ -17,9 +17,9 @@ public:
   virtual void visit(WhileStatement* e) = 0;
   
   virtual ImpType visit(BinaryExp* e) = 0;
+  virtual ImpType visit(BoolExp* e) = 0;
   virtual ImpType visit(NumberExp* e) = 0;
   virtual ImpType visit(IdExp* e) = 0;
-  virtual ImpType visit(BoolExp* e) = 0;
   virtual ImpType visit(ParenthExp* e) = 0;
   virtual ImpType visit(CondExp* e) = 0;
 };

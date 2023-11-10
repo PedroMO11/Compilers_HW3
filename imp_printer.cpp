@@ -88,6 +88,11 @@ int ImpPrinter::visit(BinaryExp* e) {
   return 0;
 }
 
+int ImpPrinter::visit(BoolExp* e) {
+  cout << (e->value ? "true" : "false");
+  return 0;
+}
+
 int ImpPrinter::visit(NumberExp* e) {
   cout << e->value;
   return 0;

@@ -1,0 +1,12 @@
+var int x, y;
+x = 3;
+if true and false then
+    if false and true then
+        y = x**2
+    else
+        y = x**4
+    endif
+else
+    y = x**3
+endif;
+print(y)

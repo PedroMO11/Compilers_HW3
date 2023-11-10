@@ -13,6 +13,8 @@ string Exp::binopToString(BinaryOp op) {
   case LT: return "<";
   case LTEQ: return "<=";
   case EQ: return "==";
+  case AND: return "and";
+  case OR: return "or";
   }
   return "";
 }
@@ -38,6 +40,10 @@ int BinaryExp::accept(ImpVisitor* v) {
   return v->visit(this);
 }
 
+int BoolExp::accept(ImpVisitor* v) {
+  return v->visit(this);
+}
+
 int NumberExp::accept(ImpVisitor* v) {
   return v->visit(this);
 }
@@ -46,9 +52,6 @@ int IdExp::accept(ImpVisitor* v) {
   return v->visit(this);
 }
 
-int BoolExp::accept(ImpVisitor* v) {
-  return v->visit(this);
-}
 
 int ParenthExp::accept(ImpVisitor* v) {
   return v->visit(this);
@@ -65,6 +68,10 @@ ImpType BinaryExp::accept(TypeVisitor* v) {
   return v->visit(this);
 }
 
+ImpType BoolExp::accept(TypeVisitor* v) {
+  return v->visit(this);
+}
+
 ImpType NumberExp::accept(TypeVisitor* v) {
   return v->visit(this);
 }
@@ -73,9 +80,6 @@ ImpType IdExp::accept(TypeVisitor* v) {
   return v->visit(this);
 }
 
-ImpType BoolExp::accept(TypeVisitor* v) {
-  return v->visit(this);
-}
 
 ImpType ParenthExp::accept(TypeVisitor* v) {
   return v->visit(this);

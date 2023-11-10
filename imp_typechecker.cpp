@@ -91,21 +91,51 @@ void ImpTypeChecker::visit(WhileStatement* s) {
 ImpType ImpTypeChecker::visit(BinaryExp* e) {
   ImpType t1 = e->left->accept(this);
   ImpType t2 = e->right->accept(this);
-  if (!t1.match(inttype) || !t2.match(inttype)) {
-    cout << "Tipos en BinExp deben de ser int" << endl;
-    exit(0);
+  // Verifica los tipos para operaciones aritméticas
+  if (e->op == PLUS || e->op == MINUS || e->op == MULT || e->op == DIV || e->op == EXP) {
+    if (!t1.match(inttype) || !t2.match(inttype)) {
+      cout << "Tipos en operación aritmética deben de ser int" << endl;
+      exit(0);
+    }
+    return inttype;
   }
-  ImpType result;
-  switch(e->op) {
-  case PLUS:   case MINUS:
-  case MULT:   case DIV:  case EXP:
-    result = inttype;
-    break;
-  case LT: case LTEQ: case EQ:
-    result = booltype;
-    break;
+  
+  // Verifica los tipos para operaciones de comparación
+  if (e->op == LT || e->op == LTEQ || e->op == EQ) {
+    if (!t1.match(inttype) || !t2.match(inttype)) {
+      cout << "Tipos en operación de comparación deben de ser int" << endl;
+      exit(0);
+    }
+    return booltype;
   }
-  return result;
+  
+  // Verifica los tipos para operaciones lógicas
+  if (e->op == AND || e->op == OR) {
+    if (!t1.match(booltype) || !t2.match(booltype)) {
+      cout << "Tipos en operación lógica deben de ser bool" << endl;
+      exit(0);
+    }
+    return booltype;
+  }
+  
+  // Si llegamos aquí, entonces hay un operador no soportado en la expresión
+  cout << "Operador no soportado en BinExp" << endl;
+  exit(0);
+  // if (!t1.match(inttype) || !t2.match(inttype)) {
+  //   cout << "Tipos en BinExp deben de ser int" << endl;
+  //   exit(0);
+  // }
+  // ImpType result;
+  // switch(e->op) {
+  // case PLUS:   case MINUS:
+  // case MULT:   case DIV:  case EXP:
+  //   result = inttype;
+  //   break;
+  // case LT: case LTEQ: case EQ:
+  //   result = booltype;
+  //   break;
+  // }
+  // return result;
 }
 
 ImpType ImpTypeChecker::visit(NumberExp* e) {
