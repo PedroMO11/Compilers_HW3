@@ -40,7 +40,7 @@ public:
 class BoolExp : public Exp {
 public:
   bool value;
-  BoolExp(string v);
+  BoolExp(bool v);
   int accept(ImpVisitor* v);
   ImpType accept(TypeVisitor* v);
   ~BoolExp();

@@ -121,6 +121,10 @@ ImpType ImpTypeChecker::visit(IdExp* e) {
   }
 }
 
+ImpType ImpTypeChecker::visit(BoolExp* e) {
+  return booltype; // !Esta mal!
+}
+
 ImpType ImpTypeChecker::visit(ParenthExp* ep) {
   return ep->e->accept(this);
 }

@@ -20,7 +20,7 @@ string Exp::binopToString(BinaryOp op) {
 
 // Constructors
 BinaryExp::BinaryExp(Exp* l, Exp* r, BinaryOp op):left(l),right(r),op(op) {}
-BoolExp::BoolExp(string v):value((v == "true") ? true : false) {}
+BoolExp::BoolExp(bool v):value(v) {}
 NumberExp::NumberExp(int v):value(v) {}
 IdExp::IdExp(string id):id(id) {}
 ParenthExp::ParenthExp(Exp *e):e(e){}
@@ -38,15 +38,15 @@ int BinaryExp::accept(ImpVisitor* v) {
   return v->visit(this);
 }
 
-int BoolExp::accept(ImpVisitor* v) {
-  return v->visit(this);
-}
-
 int NumberExp::accept(ImpVisitor* v) {
   return v->visit(this);
 }
 
 int IdExp::accept(ImpVisitor* v) {
+  return v->visit(this);
+}
+
+int BoolExp::accept(ImpVisitor* v) {
   return v->visit(this);
 }
 
@@ -65,16 +65,15 @@ ImpType BinaryExp::accept(TypeVisitor* v) {
   return v->visit(this);
 }
 
-
-ImpType BoolExp::accept(TypeVisitor* v) {
-  return v->visit(this);
-}
-
 ImpType NumberExp::accept(TypeVisitor* v) {
   return v->visit(this);
 }
 
 ImpType IdExp::accept(TypeVisitor* v) {
+  return v->visit(this);
+}
+
+ImpType BoolExp::accept(TypeVisitor* v) {
   return v->visit(this);
 }
 
